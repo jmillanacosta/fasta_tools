@@ -1,5 +1,5 @@
 /**
-* Reads a .Fasta file and returns its content as a string. 
+* Reads a .Fasta file and returns its content as a String array of {identifier : sequence}. 
 * @param  fileName  path to the Fasta file
 */
 
@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.Arrays;
 
 public abstract class fastaToString {
-    static String[] reader(String fileName) {
+    static String[][] reader(String fileName) {
         // Opens file
         File myFasta=new File(fileName);
         // Creates a StringBuilder
@@ -38,7 +38,18 @@ public abstract class fastaToString {
         String resString = seqs.toString();
         String[] res = resString.split("@");
         // Removes first empty element of array, returns array of seqs
-        String[] result = Arrays.copyOfRange(res, 1, res.length);
+        String[] res_array = Arrays.copyOfRange(res, 1, res.length);
+        String[][] result = new String[res_array.length][1];
+        // Creates array of {identifier:sequence, ...}
+        int i = 0;
+        for (String seq : res_array) {
+            if (seq != null || seq != "") {               
+                String[] item = seq.split("\\n");
+                result[i] = item;
+            }
+
+            i++;
+        }
         return result;
         }
         // Manages exceptions
@@ -47,7 +58,7 @@ public abstract class fastaToString {
             System.out.println(
                 "Unable to open file '" + 
                 fileName + "'"); 
-            String[] res = {};
+            String[][] res = {};
             return res;               
         }
         // Error reading file
@@ -55,7 +66,7 @@ public abstract class fastaToString {
             System.out.println(
                 "Error reading file '" 
                 + fileName + "'");  
-            String[] res = {};
+            String[][] res = {};
             return res;                  
           }
     
