@@ -7,23 +7,24 @@ package src;
 import java.io.*;
 
 
-public class fastaToString {
+public abstract class fastaToString {
     static String reader(String fileName) {
         // Opens file
         File myFasta=new File(fileName);
-        // Creates a result object
-        String result = "";
+        // Creates a StringBuilder
+        StringBuilder result = new StringBuilder();
         // Tries to open the file
         try {
-            // Inspects a line at a time
+            // Inspects a line at a time. Creates the line String to store each line:
             String line = null;
             // FileReader
             FileReader fileReader = new FileReader(myFasta);
-             // Always wrap FileReader in BufferedReader
+             // Instantiates a BufferedReader to wrap FileReader and increase performance
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             // Stores line in result string if it is not null
             while((line = bufferedReader.readLine()) != null) {
-                result.concat(line);
+                // System.out.println(line);
+                result.append(line);
                 
         }
         // Closes the file
@@ -42,8 +43,6 @@ public class fastaToString {
                 "Error reading file '" 
                 + fileName + "'");                  
           }
-        
-        return result;
+        return result.toString();
     }
-
 }
