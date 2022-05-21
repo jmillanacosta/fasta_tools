@@ -16,11 +16,11 @@ public class sequences implements Iterable<sequence> {
         String[][] entries = fastaToString.reader(file);
         for (String[] entry : entries){
             sequence myEntry = new sequence(entry);
-            this.add(myEntry);
+            seqList.add(myEntry);
         }
     }
     // Makes class iterable
-    private final List<sequence> seqList = new ArrayList<sequence>();
+    public final List<sequence> seqList = new ArrayList<sequence>();
 
     @Override
     public Iterator<sequence> iterator() {
@@ -31,15 +31,12 @@ public class sequences implements Iterable<sequence> {
     // Method that gets the IDs of the entries
     public String getIds(){
         StringBuilder ids_build = new StringBuilder();
+        int i = 0;
         for (sequence seq : seqList){
-            ids_build.append(seq.seq);       
+            ids_build.append("Sequence identifier " + i + ": " + seq.id + "\n");  
+            i++;     
         }
         String ids = ids_build.toString();
         return ids;
     }
-
-    public static void main(String[] args) {
-        System.out.println("h");
-        
-    }    
 }
