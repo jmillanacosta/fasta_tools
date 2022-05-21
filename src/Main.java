@@ -6,4 +6,8 @@ public class Main {
         sequences mySeqs = new sequences(file);
         System.out.println(mySeqs.getIds());
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dfd73cd6c498bbe43a0ed39c4bc8d0f02a556a6c

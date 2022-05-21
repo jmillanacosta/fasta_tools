@@ -39,4 +39,8 @@ public class sequences implements Iterable<sequence> {
         String ids = ids_build.toString();
         return ids;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dfd73cd6c498bbe43a0ed39c4bc8d0f02a556a6c
