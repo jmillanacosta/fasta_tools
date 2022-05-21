@@ -1,2 +1,2 @@
-# Fasta sort
-Sorts fasta sequences in a file according to the given argument (length: ascending, descending; %GC content: ascending, descending)
+# Fasta tools
+Reads a fasta file and performs simple analyses. (work in progress)
