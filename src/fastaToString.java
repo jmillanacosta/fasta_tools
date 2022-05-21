@@ -12,7 +12,7 @@ public abstract class fastaToString {
         // Opens file
         File myFasta=new File(fileName);
         // Creates a StringBuilder
-        StringBuilder seqs = new StringBuilder();
+        StringBuilder seqsText = new StringBuilder();
         // Tries to open the file
         try {
             // Inspects one line at a time. Creates the line String to store each line:
@@ -26,21 +26,22 @@ public abstract class fastaToString {
                 // Checks if it is the start of a new sequence to add it in a new line. Pattern for new sequences is >
                 
                 if (line.matches("(.*)>(.*)")) {
-                    seqs.append("@"+ line +"\n");
+                    seqsText.append("@"+ line +"\n");
                 }else{
-                    seqs.append(line);
-                }
-            
+                    seqsText.append(line);
+                } 
         }
         // Closes the file
         bufferedReader.close();
+
+
         // Convert stringBuilder to a String 
-        String resString = seqs.toString();
-        String[] res = resString.split("@");
-        // Removes first empty element of array, returns array of seqs
+        String seqsString = seqsText.toString();
+        String[] res = seqsString.split("@");
+        // Removes first empty element of array, returns array of seqsText
         String[] res_array = Arrays.copyOfRange(res, 1, res.length);
-        String[][] result = new String[res_array.length][1];
         // Creates array of {identifier:sequence, ...}
+        String[][] result = new String[res_array.length][1];
         int i = 0;
         for (String seq : res_array) {
             if (seq != null || seq != "") {               
@@ -52,6 +53,9 @@ public abstract class fastaToString {
         }
         return result;
         }
+
+
+
         // Manages exceptions
         // File not found
         catch(FileNotFoundException ex) {
