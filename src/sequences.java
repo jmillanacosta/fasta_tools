@@ -39,8 +39,17 @@ public class sequences implements Iterable<sequence> {
         String ids = ids_build.toString();
         return ids;
     }
-<<<<<<< HEAD
+
+    // Method that gets the seqs of the entries
+    public String getSeqs(){
+        StringBuilder seqs_build = new StringBuilder();
+        int i = 0;
+        for (sequence seq : seqList){
+            seqs_build.append("Entry " + i + "\n" + seq.id + "\n" + seq.seq + "\n\n");  
+            i++;     
+        }
+        String seqs = seqs_build.toString();
+        return seqs;
+    }
 }
-=======
-}
->>>>>>> dfd73cd6c498bbe43a0ed39c4bc8d0f02a556a6c
+
