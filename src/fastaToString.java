@@ -61,16 +61,18 @@ public abstract class fastaToString {
         catch(FileNotFoundException ex) {
             System.out.println(
                 "Unable to open file '" + 
-                fileName + "'"); 
+                fileName + "'\n"); 
             String[][] res = {};
+            System.exit(0);
             return res;               
         }
         // Error reading file
         catch(IOException ex) {
             System.out.println(
                 "Error reading file '" 
-                + fileName + "'");  
+                + fileName + "'\n");  
             String[][] res = {};
+            System.exit(0);
             return res;                  
           }
     

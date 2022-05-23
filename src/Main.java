@@ -7,7 +7,8 @@ public class Main {
 
         String file = "try3.fasta";
         System.out.println(sep + "\tFASTA TOOLS \nAnalyzing entries in " + file + sep);
+
         sequences mySeqs = new sequences(file);
-        mySeqs.writeFasta();        
+        mySeqs.writeFasta();   
     }
 }
