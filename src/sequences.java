@@ -102,7 +102,7 @@ public class sequences implements Iterable<sequence> {
             boolean matchFound = matcher.find();
             if (matchFound == true){
                 results.add(seq);
-                System.out.println(seq.id + " found in entries.");
+                System.out.println("\t" + seq.id);
             }
         }
         return results;
@@ -156,40 +156,21 @@ public class sequences implements Iterable<sequence> {
     }
 
     // Method to update the Fasta file
-    public void writeFasta(){
-        System.out.println(sep + "Write file" );
-        Scanner in = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("Update/create fasta file and close program (Y/n)?");
-            String str = in.next();
-            if (!str.equalsIgnoreCase("Y")) {
-                System.out.println("Not updating");
-                break;
-            }
-            if (str.equalsIgnoreCase("Y")) {
-                System.out.println("Enter name of the output file:\n");
-                String fileName = in.next();
-                StringBuilder seqs_build = new StringBuilder();
-                for (sequence seq : seqList){
-                    seqs_build.append(seq.id + "\n" + seq.seq + "\n");     
-                }
-                String seqs = seqs_build.toString();
-                System.out.println("File " + fileName + " updated/created");
-                try {
-                    File myFasta=new File(fileName);
-                    FileWriter f = new FileWriter(myFasta, false);
-                    f.write(seqs);
-                    f.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
+    public void writeFasta(String outFile){
+        StringBuilder seqs_build = new StringBuilder();
+        for (sequence seq : seqList){
+            seqs_build.append(seq.id + "\n" + seq.seq + "\n");     
         }
-        in.close();
-
-    
+        String seqs = seqs_build.toString();
+        System.out.println("File " + outFile + " updated/created");
+        try {
+            File myFasta=new File(outFile);
+            FileWriter f = new FileWriter(myFasta, false);
+            f.write(seqs);
+            f.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }      
     }
     
 }
