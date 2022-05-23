@@ -1,6 +1,7 @@
 // Class is an iterable list of FASTA entries. Most program functionalities are methods here.
 
 package src;
+import java.io.FileWriter;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -140,4 +141,7 @@ public class sequences implements Iterable<sequence> {
         System.out.println("Successfully sorted entries in " + order + " order");
 
     }
+
+    // Method to update the Fasta file
+    
 }
