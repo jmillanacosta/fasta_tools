@@ -10,6 +10,8 @@ public class Main {
         System.out.println(sep + "\tFASTA TOOLS \nAnalyzing entries in " + file + sep);
 
         sequences mySeqs = new sequences(file);
-        mySeqs.writeFasta();   
+        List<sequence> removedSeqs = mySeqs.browse("dummy");
+        mySeqs.removeSeqs(removedSeqs);
+        mySeqs.writeFasta();
     }
 }
