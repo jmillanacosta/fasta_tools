@@ -28,7 +28,7 @@ public class sequences implements Iterable<sequence> {
     for (String[] entry : entries){
         sequence myEntry = new sequence(entry);
         if (seen.contains(myEntry.id)){
-            System.out.println("Redundant entry with identifier " + myEntry.id + " ommited.\n");
+            System.out.println("Redundant entry with identifier " + myEntry.id + " ommited.");
             redundant++;
             
         }else{
@@ -102,11 +102,22 @@ public class sequences implements Iterable<sequence> {
             boolean matchFound = matcher.find();
             if (matchFound == true){
                 results.add(seq);
+                System.out.println(seq.id + " found in entries.");
             }
         }
         return results;
     }
     
+    // Method to remove browsed sequences
+    public void removeSeqs(List<sequence> seqsRemove){
+        for (int i = 0; i < seqsRemove.size(); i++) {
+            sequence seq = seqsRemove.get(i);
+            if (seqList.contains(seq)){
+                seqList.remove(seq);
+                System.out.println("Removed entry: " + seq.id);
+            }
+        }
+    }
 
     // Method that sorts the sequences by length (ascending / descending)
     public void sortLength(String order) {
