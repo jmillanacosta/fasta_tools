@@ -19,7 +19,7 @@ public class sequences implements Iterable<sequence> {
     for (String[] entry : entries){
         sequence myEntry = new sequence(entry);
         if (seen.contains(myEntry.id)){
-            System.out.println("Duplicate ignored");
+            System.out.println("__________________________________________________\nDuplicate with identifier " + myEntry.id + " ignored.\n__________________________________________________\n");
             
         }else{
             seqList.add(myEntry); 
@@ -99,7 +99,6 @@ public class sequences implements Iterable<sequence> {
             for (sequence seq : seqList){
                 if (lengths.get(i) == seq.length){
                     newSeqList.add(seq);
-                    //System.out.println(i + "__" + seq.id + "  " + seq.length + "  ");
                 }  
             }
         }  
