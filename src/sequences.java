@@ -2,6 +2,8 @@
 
 package src;
 import java.util.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class sequences implements Iterable<sequence> {
     String sep = "\n- - - - -\n";
@@ -89,6 +91,18 @@ public class sequences implements Iterable<sequence> {
     }
 
     // Method that browses a query ID and returns the match(es)
+    public List<sequence> browse(String idPattern){
+        List<sequence> results = new ArrayList<sequence>();
+        Pattern pattern = Pattern.compile(idPattern, Pattern.CASE_INSENSITIVE);
+        for (sequence seq : seqList) {
+            Matcher matcher = pattern.matcher(seq.id);
+            boolean matchFound = matcher.find();
+            if (matchFound == true){
+                results.add(seq);
+            }
+        }
+        return results;
+    }
     
 
     // Method that sorts the sequences by length (ascending / descending)
