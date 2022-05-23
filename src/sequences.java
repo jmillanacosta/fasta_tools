@@ -1,10 +1,15 @@
 // Class is an iterable list of FASTA entries. Most program functionalities are methods here.
 
 package src;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.io.File;
 
 public class sequences implements Iterable<sequence> {
-    String sep = "\n- - - - -\n";
+    String sep = "\n...";
     int size = 0;
     // Array to store entries added to this list
     public Object elements[];
@@ -17,13 +22,13 @@ public class sequences implements Iterable<sequence> {
 
     String[][] entries = fastaToString.reader(file);
     List<String> seen = new ArrayList<String>();
-    System.out.println(sep + "Retrieving entries" + sep);
+    System.out.println(sep + "Retrieving entries" );
     int count = 0;
     int redundant = 0;
     for (String[] entry : entries){
         sequence myEntry = new sequence(entry);
         if (seen.contains(myEntry.id)){
-            System.out.println("Redundant entry with identifier " + myEntry.id + " ommited.");
+            System.out.println("Redundant entry with identifier " + myEntry.id + " ommited.\n");
             redundant++;
             
         }else{
@@ -49,7 +54,7 @@ public class sequences implements Iterable<sequence> {
     // Method that gets the IDs of the entries
     public String getIds(){
         StringBuilder ids_build = new StringBuilder();
-        ids_build.append(sep + "List of entries" + sep);
+        ids_build.append(sep + "List of entries" );
         int i = 0;
         for (sequence seq : seqList){
             ids_build.append("Entry " + i + ": " + seq.id + "\n\n");  
@@ -62,7 +67,7 @@ public class sequences implements Iterable<sequence> {
     // Method that gets the seqs of the entries
     public String getSeqs(){
         StringBuilder seqs_build = new StringBuilder();
-        seqs_build.append(sep + "Sequence view" + sep);
+        seqs_build.append(sep + "Sequence view" );
         int i = 0;
         for (sequence seq : seqList){
             seqs_build.append("Entry " + i + "\n" + seq.id + "\n" + seq.seq + "\n\n");  
@@ -76,7 +81,7 @@ public class sequences implements Iterable<sequence> {
     public String getLength(){
         // Creates a StringBuilder to store all lengths and formatted text
         StringBuilder length_build = new StringBuilder();
-        length_build.append(sep + "Length view" +sep);
+        length_build.append(sep + "Length view" );
         // Loops through all sequence objects in List<sequence> and retrieves seq.length
         int i = 0;
         for (sequence seq : seqList){
@@ -89,11 +94,23 @@ public class sequences implements Iterable<sequence> {
     }
 
     // Method that browses a query ID and returns the match(es)
+    public List<sequence> browse(String idPattern){
+        List<sequence> results = new ArrayList<sequence>();
+        Pattern pattern = Pattern.compile(idPattern, Pattern.CASE_INSENSITIVE);
+        for (sequence seq : seqList) {
+            Matcher matcher = pattern.matcher(seq.id);
+            boolean matchFound = matcher.find();
+            if (matchFound == true){
+                results.add(seq);
+            }
+        }
+        return results;
+    }
     
 
     // Method that sorts the sequences by length (ascending / descending)
     public void sortLength(String order) {
-        System.out.println(sep + "Sort " + order + sep);
+        System.out.println(sep + "Sort " + order );
         // List of int to store lengths
         List<Integer> lengths = new ArrayList<Integer>();
         for (sequence seq : seqList){
@@ -126,4 +143,42 @@ public class sequences implements Iterable<sequence> {
         System.out.println("Successfully sorted entries in " + order + " order");
 
     }
+
+    // Method to update the Fasta file
+    public void writeFasta(){
+        System.out.println(sep + "Write file" );
+        Scanner in = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Update/create fasta file and close program (Y/n)?");
+            String str = in.next();
+            if (!str.equalsIgnoreCase("Y")) {
+                System.out.println("Not updating");
+                break;
+            }
+            if (str.equalsIgnoreCase("Y")) {
+                System.out.println("Enter name of the output file:\n");
+                String fileName = in.next();
+                StringBuilder seqs_build = new StringBuilder();
+                for (sequence seq : seqList){
+                    seqs_build.append(seq.id + "\n" + seq.seq + "\n");     
+                }
+                String seqs = seqs_build.toString();
+                System.out.println("File " + fileName + " updated/created");
+                try {
+                    File myFasta=new File(fileName);
+                    FileWriter f = new FileWriter(myFasta, false);
+                    f.write(seqs);
+                    f.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+        in.close();
+
+    
+    }
+    
 }
