@@ -51,7 +51,6 @@ public class sequences implements Iterable<sequence> {
         return ids;
     }
 
-        StringBuilder length_build = new StringBuilder();
     // Method that gets the seqs of the entries
     public String getSeqs(){
         StringBuilder seqs_build = new StringBuilder();
