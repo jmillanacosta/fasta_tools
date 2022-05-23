@@ -6,9 +6,9 @@ public class Main {
         sequences mySeqs = new sequences(file);
         System.out.println(mySeqs.getLength());
         mySeqs.sortLength("ascending");
-        System.out.println("____________\n" +mySeqs.getLength());
+        System.out.println(mySeqs.getLength());
         mySeqs.sortLength("descending");
-        System.out.println("____________\n" +mySeqs.getLength());
+        System.out.println(mySeqs.getLength());
         
         
     }

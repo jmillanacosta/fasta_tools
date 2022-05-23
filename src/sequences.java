@@ -4,6 +4,7 @@ package src;
 import java.util.*;
 
 public class sequences implements Iterable<sequence> {
+    String sep = "\n- - - - -\n";
     int size = 0;
     // Array to store entries added to this list
     public Object elements[];
@@ -16,18 +17,24 @@ public class sequences implements Iterable<sequence> {
 
     String[][] entries = fastaToString.reader(file);
     List<String> seen = new ArrayList<String>();
+    System.out.println(sep + "Retrieving entries" + sep);
+    int count = 0;
+    int redundant = 0;
     for (String[] entry : entries){
         sequence myEntry = new sequence(entry);
         if (seen.contains(myEntry.id)){
-            System.out.println("__________________________________________________\nDuplicate with identifier " + myEntry.id + " ignored.\n__________________________________________________\n");
+            System.out.println("Redundant entry with identifier " + myEntry.id + " ommited.");
+            redundant++;
             
         }else{
             seqList.add(myEntry); 
             seen.add(myEntry.id);
+            count++;
         }
+
         
     }
- 
+    System.out.println(count +  " entries identified, with " + redundant + " redundant entries ommited");
     }
 
     // Makes class an iterable list
@@ -42,6 +49,7 @@ public class sequences implements Iterable<sequence> {
     // Method that gets the IDs of the entries
     public String getIds(){
         StringBuilder ids_build = new StringBuilder();
+        ids_build.append(sep + "List of entries" + sep);
         int i = 0;
         for (sequence seq : seqList){
             ids_build.append("Entry " + i + ": " + seq.id + "\n\n");  
@@ -54,6 +62,7 @@ public class sequences implements Iterable<sequence> {
     // Method that gets the seqs of the entries
     public String getSeqs(){
         StringBuilder seqs_build = new StringBuilder();
+        seqs_build.append(sep + "Sequence view" + sep);
         int i = 0;
         for (sequence seq : seqList){
             seqs_build.append("Entry " + i + "\n" + seq.id + "\n" + seq.seq + "\n\n");  
@@ -67,6 +76,7 @@ public class sequences implements Iterable<sequence> {
     public String getLength(){
         // Creates a StringBuilder to store all lengths and formatted text
         StringBuilder length_build = new StringBuilder();
+        length_build.append(sep + "Length view" +sep);
         // Loops through all sequence objects in List<sequence> and retrieves seq.length
         int i = 0;
         for (sequence seq : seqList){
@@ -83,6 +93,7 @@ public class sequences implements Iterable<sequence> {
 
     // Method that sorts the sequences by length (ascending / descending)
     public void sortLength(String order) {
+        System.out.println(sep + "Sort " + order + sep);
         // List of int to store lengths
         List<Integer> lengths = new ArrayList<Integer>();
         for (sequence seq : seqList){
@@ -111,9 +122,8 @@ public class sequences implements Iterable<sequence> {
         for (int j = 0; j < newSeqList.size(); j++){
             sequence newSeq = newSeqList.get(j);
             seqList.set(j, newSeq);         
-        }    
-    
+        }      
+        System.out.println("Successfully sorted entries in " + order + " order");
 
-
-}
+    }
 }
