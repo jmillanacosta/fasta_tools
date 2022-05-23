@@ -95,6 +95,7 @@ public class sequences implements Iterable<sequence> {
         }
         // Creates temporary List<sequence> to store sequences sorted by length
         List<sequence> newSeqList = new ArrayList<sequence>();
+
         // List of seen ids to avoid compile error when several entries have the same length
         List<String> seen = new ArrayList<String>();
         for (int i = 0; i < lengths.size(); i++){
@@ -102,6 +103,12 @@ public class sequences implements Iterable<sequence> {
                 if (lengths.get(i) == seq.length && seen.contains(seq.id) == false){
                     newSeqList.add(seq);
                     seen.add(seq.id);
+        for (int i = 0; i < lengths.size(); i++){
+            for (sequence seq : seqList){
+                if (lengths.get(i) == seq.length){
+                    newSeqList.add(seq);
+                    //System.out.println(i + "__" + seq.id + "  " + seq.length + "  ");
+
                 }  
             }
         }  

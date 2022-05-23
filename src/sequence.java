@@ -23,9 +23,5 @@ class sequence {
         id = getId(entry);
         length = getLength(seq);
     }
-
-     
-
-    
-    
+       
 }
