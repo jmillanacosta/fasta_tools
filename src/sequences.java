@@ -110,6 +110,7 @@ public class Sequences {
     
     // Method to remove browsed Sequences
     public void removeSeqs(List<Sequence> seqsRemove){
+        System.out.println("\n");
         for (int i = 0; i < seqsRemove.size(); i++) {
             Sequence seq = seqsRemove.get(i);
             if (seqList.contains(seq)){
