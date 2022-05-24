@@ -10,7 +10,8 @@ Key Features:
 * Generating a new file / overwriting with queried entries only
 
 ## Running
-Compile all classes under `src`: ```javac src/*.java```
+Compile all classes under `src`: ```javac src/*.java```;
+
 And run ```java src/FastaTools``` with the following arguments:
 
 <table>
