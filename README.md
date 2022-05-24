@@ -101,5 +101,13 @@ java src/FastaTools in.fasta sd out.fasta
 will create/overwrite a file `out.fasta` with all entries in `in.fasta` sorted by descending length.
 (Work in progress)
 
+## Details
+* All entries in the `file` fasta file are parsed with `FastaToString.reader(file)`. 
+* Objects in the class `Sequence` store entries with their `id`, `sequence` and `length` attributes.
+* Objects in the class `Sequences` store an ArrayList of sequences and provide the methods to browse, remove, sort and write sequences into a new or existing file.
+* The class `FastaTools` provides a CLI interface to the rest of classes and methods.
+
+
+
 
 
