@@ -26,21 +26,6 @@ It is necessary to pass the arguments in the table below.
 
 ## Usage
 
-Remove and browse require a `p` pattern in position 2. For sorting (`sd` and `ad`), position 2 becomes `outFile`.
-
-For example:
-
-```
-java src/FastaTools in.fasta r dummy out.fasta
-```
-will create/overwrite a file `out.fasta` with all entries in `in.fasta` except the ones containing the pattern `dummy` in their sequence identifier.
-
-```
-java src/FastaTools in.fasta sd out.fasta
-```
-
-will create/overwrite a file `out.fasta` with all entries in `in.fasta` sorted by descending length.
-
 ### Table of arguments
 
 <table>
@@ -91,6 +76,22 @@ will create/overwrite a file `out.fasta` with all entries in `in.fasta` sorted b
     </tbody>
 </table>
 
+### Examples
+
+Remove `r` and browse `b`require a pattern `p` in position 2. For sorting (`sd` and `ad`), position 2 becomes `outFile`.
+
+For example:
+
+```
+java src/FastaTools in.fasta r dummy out.fasta
+```
+will create/overwrite a file `out.fasta` with all entries in `in.fasta` except the ones containing the pattern `dummy` in their sequence identifier.
+
+```
+java src/FastaTools in.fasta sd out.fasta
+```
+
+will create/overwrite a file `out.fasta` with all entries in `in.fasta` sorted by descending length.
 (Work in progress)
 
 
