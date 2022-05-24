@@ -16,13 +16,15 @@ Compile all classes under `src`:
 javac src/*.java
 ```
 
-Then run
+And then run `FastaTools`:
 
 ```
 java src/FastaTools
 ``` 
 
-with the following arguments.
+It is necessary to pass the arguments in the table below.
+
+## Usage
 
 Remove and browse require a `p` pattern in position 2. For sorting (`sd` and `ad`), position 2 becomes `outFile`.
 
