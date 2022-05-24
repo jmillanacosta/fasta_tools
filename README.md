@@ -12,11 +12,15 @@ Key Features:
 ## Running
 Compile all classes under `src`: 
 
-````javac src/*.java````.
+```
+javac src/*.java
+```
 
 Then run: 
 
-````java src/FastaTools```` 
+```
+java src/FastaTools
+``` 
 
 with the following arguments:
 
