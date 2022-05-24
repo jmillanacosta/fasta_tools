@@ -107,7 +107,7 @@ will create/overwrite a file `out.fasta` with all entries in `in.fasta` sorted b
 * Objects in the class `Sequences` store an ArrayList of sequences and provide the methods to browse, remove, sort and write sequences into a new or existing file.
 * The class `FastaTools` provides a CLI interface to the rest of classes and methods.
 
-<svg src="files/workflow_font.svg" width = "250">
+![Workflow]()<img src="files/workflow_font.svg">
 
 
 
