@@ -8,25 +8,24 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.io.File;
 
-public class sequences implements Iterable<sequence> {
+public class sequences {
     String sep = "\n...";
     int size = 0;
     // Array to store entries added to this list
-    public Object elements[];
+    private Object elements[];
     //add method
-    public void add(sequence seq){
+    public void add(Sequence seq){
         elements[size++] = seq;
     }
     // Constructor
     public sequences(String file){ 
-
-    String[][] entries = fastaToString.reader(file);
+    String[][] entries = FastaToString.reader(file);
     List<String> seen = new ArrayList<String>();
     System.out.println(sep + "Retrieving entries" );
     int count = 0;
     int redundant = 0;
     for (String[] entry : entries){
-        sequence myEntry = new sequence(entry);
+        Sequence myEntry = new Sequence(entry);
         if (seen.contains(myEntry.id)){
             System.out.println("Redundant entry with identifier " + myEntry.id + " ommited.");
             redundant++;
@@ -39,16 +38,13 @@ public class sequences implements Iterable<sequence> {
 
         
     }
-    System.out.println(count +  " entries identified, with " + redundant + " redundant entries ommited");
+    System.out.println(count +  " entries identified. " + redundant + " redundant entries ommited");
     }
 
-    // Makes class an iterable list
-    public final List<sequence> seqList = new ArrayList<sequence>();
+    // Makes a list
+    public final List<Sequence> seqList = new ArrayList<Sequence>();
 
-    @Override
-    public Iterator<sequence> iterator() {
-        return seqList.iterator();
-    }
+
 
 
     // Method that gets the IDs of the entries
@@ -56,7 +52,7 @@ public class sequences implements Iterable<sequence> {
         StringBuilder ids_build = new StringBuilder();
         ids_build.append(sep + "List of entries" );
         int i = 0;
-        for (sequence seq : seqList){
+        for (Sequence seq : seqList){
             ids_build.append("Entry " + i + ": " + seq.id + "\n\n");  
             i++;     
         }
@@ -69,7 +65,7 @@ public class sequences implements Iterable<sequence> {
         StringBuilder seqs_build = new StringBuilder();
         seqs_build.append(sep + "Sequence view" );
         int i = 0;
-        for (sequence seq : seqList){
+        for (Sequence seq : seqList){
             seqs_build.append("Entry " + i + "\n" + seq.id + "\n" + seq.seq + "\n\n");  
             i++;     
         }
@@ -84,7 +80,7 @@ public class sequences implements Iterable<sequence> {
         length_build.append(sep + "Length view" );
         // Loops through all sequence objects in List<sequence> and retrieves seq.length
         int i = 0;
-        for (sequence seq : seqList){
+        for (Sequence seq : seqList){
             length_build.append("Entry " + i + ": " + seq.id + " --> Length is " + seq.length + "\n\n");  
             i++;     
         }
@@ -94,10 +90,10 @@ public class sequences implements Iterable<sequence> {
     }
 
     // Method that browses a query ID and returns the match(es)
-    public List<sequence> browse(String idPattern){
-        List<sequence> results = new ArrayList<sequence>();
+    public List<Sequence> browse(String idPattern){
+        List<Sequence> results = new ArrayList<Sequence>();
         Pattern pattern = Pattern.compile(idPattern, Pattern.CASE_INSENSITIVE);
-        for (sequence seq : seqList) {
+        for (Sequence seq : seqList) {
             Matcher matcher = pattern.matcher(seq.id);
             boolean matchFound = matcher.find();
             if (matchFound == true){
@@ -105,13 +101,17 @@ public class sequences implements Iterable<sequence> {
                 System.out.println("\t" + seq.id);
             }
         }
+        if (results.isEmpty()){
+            System.out.println("No matches found for " + idPattern);
+        }
+        
         return results;
     }
     
     // Method to remove browsed sequences
-    public void removeSeqs(List<sequence> seqsRemove){
+    public void removeSeqs(List<Sequence> seqsRemove){
         for (int i = 0; i < seqsRemove.size(); i++) {
-            sequence seq = seqsRemove.get(i);
+            Sequence seq = seqsRemove.get(i);
             if (seqList.contains(seq)){
                 seqList.remove(seq);
                 System.out.println("Removed entry: " + seq.id);
@@ -124,7 +124,7 @@ public class sequences implements Iterable<sequence> {
         System.out.println(sep + "Sort " + order );
         // List of int to store lengths
         List<Integer> lengths = new ArrayList<Integer>();
-        for (sequence seq : seqList){
+        for (Sequence seq : seqList){
             lengths.add(seq.length);
         }
         // ascending or descending 
@@ -133,12 +133,12 @@ public class sequences implements Iterable<sequence> {
             Collections.reverse(lengths);
         }
         // Creates temporary List<sequence> to store sequences sorted by length
-        List<sequence> newSeqList = new ArrayList<sequence>();
+        List<Sequence> newSeqList = new ArrayList<Sequence>();
 
         // List of seen ids to avoid compile error when several entries have the same length
         List<String> seen = new ArrayList<String>();
         for (int i = 0; i < lengths.size(); i++){
-            for (sequence seq : seqList){
+            for (Sequence seq : seqList){
                 if (lengths.get(i) == seq.length && seen.contains(seq.id) == false){
                     newSeqList.add(seq);
                     seen.add(seq.id);
@@ -148,7 +148,7 @@ public class sequences implements Iterable<sequence> {
 
         // Sets the sequences from the temporary list to the seqList to sort all entries by length
         for (int j = 0; j < newSeqList.size(); j++){
-            sequence newSeq = newSeqList.get(j);
+            Sequence newSeq = newSeqList.get(j);
             seqList.set(j, newSeq);         
         }      
         System.out.println("Successfully sorted entries in " + order + " order");
@@ -158,7 +158,7 @@ public class sequences implements Iterable<sequence> {
     // Method to update the Fasta file
     public void writeFasta(String outFile){
         StringBuilder seqs_build = new StringBuilder();
-        for (sequence seq : seqList){
+        for (Sequence seq : seqList){
             seqs_build.append(seq.id + "\n" + seq.seq + "\n");     
         }
         String seqs = seqs_build.toString();

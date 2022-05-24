@@ -1,6 +1,7 @@
 package src;
-
-public class fastaTools {
+import java.util.ArrayList;
+import java.util.Collections;
+public class FastaTools {
     
     public static void main(String[] args) {   
     // Argument string and formatting output
@@ -11,37 +12,57 @@ public class fastaTools {
     String option = args[1].toString();
     String p = args[2].toString();
     String outFile = args[3].toString();
-    System.out.println(file + " | " + option + " | " + p + " | " + outFile);
+    System.out.println("Analyzed fasta: " + file + " | option: " + option + " | pattern: " + p + " | out file: " + outFile);
+    ArrayList<String> options = new ArrayList<>(5);
+    Collections.addAll(options, "r", "b", "sa", "sd");
+
+
+    
 
     // Select option 
-
-    // Removing an entry
+    if (options.contains(option)){
+            // Removing an entry
     if (option.equals("r")){
-        System.out.println("\nr - Remove entries from file.");
-        System.out.println("The following entries match the pattern (" + p + ") and will be removed:");
-        mySeqs.removeSeqs(mySeqs.browse(p));
-        System.out.println("\n");
-        mySeqs.writeFasta(outFile);  
+        if (args.length == 4){
+            System.out.println("\nr - Remove entries from file.");
+            System.out.println("The following entries match the pattern (" + p + ") and will be removed:");
+            mySeqs.removeSeqs(mySeqs.browse(p));
+            System.out.println("\n");
+            mySeqs.writeFasta(outFile);  
+        }
+
 
     }    
     // Sorting entries
-    if (option.equals("sa") || option.equals("sd")){
+    if (option.equals("sd") || option.equals("sa")){
         String order = "invalid";
-
         if (option.equals("sa")){
             order = "ascending";
         }
         if (option.equals("sd")){
             order = "descending";
         }
-
-        System.out.println(order);
-        System.out.println("\ns - Sort entries in " + order + " order");
-        mySeqs.sortLength(order);
-        System.out.println("\n");
-        mySeqs.writeFasta(outFile);
-    }
-       
+            System.out.println("\ns - Sort entries in " + order + " order");
+            mySeqs.sortLength(order);
+            System.out.println("\n");
+            mySeqs.writeFasta(outFile);
     }
     
+    
+       
+    // Browsing entries
+    if (option.equals("b")) {
+        mySeqs.browse(p); 
+    }   
+
+    }else{
+        System.out.println("\nOption argument '" + option + "' is invalid.\nType FastaTools h for help. \nAdmitted option arguments are:"+
+            "\n\t* b: Browse sequences containing a single pattern on their id." +
+            "\n\t* r: Remove sequences containing a single pattern on their id." +
+            "\n\t* sa | sd: Sort sequences in ascending or descending order" +
+            "\n\t* r: Remove sequences containing a single pattern on their id.\n");
+    }
+
+
+    }
 }

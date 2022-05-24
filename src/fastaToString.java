@@ -7,7 +7,7 @@ package src;
 import java.io.*;
 import java.util.Arrays;
 
-public abstract class fastaToString {
+public abstract class FastaToString {
     static String[][] reader(String fileName) {
         // Opens file
         File myFasta=new File(fileName);

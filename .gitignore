@@ -1,3 +1,4 @@
 .vscode/settings.json
 *.fasta
 .vscode
+*.class
