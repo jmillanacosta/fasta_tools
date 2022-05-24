@@ -16,13 +16,30 @@ Compile all classes under `src`:
 javac src/*.java
 ```
 
-Then run: 
+Then run
 
 ```
 java src/FastaTools
 ``` 
 
-with the following arguments:
+with the following arguments.
+
+Remove and browse require a `p` pattern in position 2. For sorting (`sd` and `ad`), position 2 becomes `outFile`.
+
+For example:
+
+```
+java src/FastaTools in.fasta r dummy out.fasta
+```
+will create/overwrite a file `out.fasta` with all entries in `in.fasta` except the ones containing the pattern `dummy` in their sequence identifier.
+
+```
+java src/FastaTools in.fasta sd out.fasta
+```
+
+will create/overwrite a file `out.fasta` with all entries in `in.fasta` sorted by descending length.
+
+### Table of arguments
 
 <table>
     <thead>
@@ -35,7 +52,7 @@ with the following arguments:
     <tbody>
         <tr>
             <td rowspan=1>0</td>
-            <td rowspan=1>File path</td>
+            <td rowspan=1>file (File path)</td>
             <td>Path of the FASTA to be analyzed</td>
         </tr>
         <tr>
@@ -66,11 +83,13 @@ with the following arguments:
   </tr>
     <tr>
     <td>3</td>
-    <td>File path</td>
+    <td>outFile (File path)</td>
     <td>File to create/overwrite with result</td>
   </tr>
     </tbody>
 </table>
+
+(Work in progress)
 
 
 
