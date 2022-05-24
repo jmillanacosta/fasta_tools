@@ -7,8 +7,8 @@ public class FastaTools {
     // Argument string and formatting output
     String sep = "\n- - - - - - - - - - - - - - \n"; 
     String file = args[0].toString();
-    System.out.println(sep + "\tFASTA TOOLS \nAnalyzing entries in " + file + sep);
-    sequences mySeqs = new sequences(file);
+    System.out.println(sep + "\tFastaTools \nAnalyzing entries in " + file + sep);
+    Sequences mySeqs = new Sequences(file);
     String option = args[1].toString();
     String p = args[2].toString();
     String outFile = args[3].toString();
@@ -42,9 +42,8 @@ public class FastaTools {
         if (option.equals("sd")){
             order = "descending";
         }
-            System.out.println("\ns - Sort entries in " + order + " order");
+            System.out.println("\n" + option + "- Sort entries in " + order + " order");
             mySeqs.sortLength(order);
-            System.out.println("\n");
             mySeqs.writeFasta(outFile);
     }
     
@@ -52,7 +51,9 @@ public class FastaTools {
        
     // Browsing entries
     if (option.equals("b")) {
+        System.out.println("\nb - Browse pattern '" + p + "'. The following entries match the pattern:");
         mySeqs.browse(p); 
+        System.out.print("Storing entries in " + outFile);
     }   
 
     }else{

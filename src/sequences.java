@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.io.File;
 
-public class sequences {
+public class Sequences {
     String sep = "\n...";
     int size = 0;
     // Array to store entries added to this list
@@ -18,7 +18,7 @@ public class sequences {
         elements[size++] = seq;
     }
     // Constructor
-    public sequences(String file){ 
+    public Sequences(String file){ 
     String[][] entries = FastaToString.reader(file);
     List<String> seen = new ArrayList<String>();
     System.out.println(sep + "Retrieving entries" );
@@ -73,12 +73,12 @@ public class sequences {
         return seqs;
     }
 
-    // Method that gets the length of the sequences of the entries
+    // Method that gets the length of the Sequences of the entries
     public String getLength(){
         // Creates a StringBuilder to store all lengths and formatted text
         StringBuilder length_build = new StringBuilder();
         length_build.append(sep + "Length view" );
-        // Loops through all sequence objects in List<sequence> and retrieves seq.length
+        // Loops through all Sequence objects in List<Sequence> and retrieves seq.length
         int i = 0;
         for (Sequence seq : seqList){
             length_build.append("Entry " + i + ": " + seq.id + " --> Length is " + seq.length + "\n\n");  
@@ -108,7 +108,7 @@ public class sequences {
         return results;
     }
     
-    // Method to remove browsed sequences
+    // Method to remove browsed Sequences
     public void removeSeqs(List<Sequence> seqsRemove){
         for (int i = 0; i < seqsRemove.size(); i++) {
             Sequence seq = seqsRemove.get(i);
@@ -119,7 +119,7 @@ public class sequences {
         }
     }
 
-    // Method that sorts the sequences by length (ascending / descending)
+    // Method that sorts the Sequences by length (ascending / descending)
     public void sortLength(String order) {
         System.out.println(sep + "Sort " + order );
         // List of int to store lengths
@@ -132,7 +132,7 @@ public class sequences {
         if (order == "descending"){
             Collections.reverse(lengths);
         }
-        // Creates temporary List<sequence> to store sequences sorted by length
+        // Creates temporary List<Sequence> to store Sequences sorted by length
         List<Sequence> newSeqList = new ArrayList<Sequence>();
 
         // List of seen ids to avoid compile error when several entries have the same length
@@ -146,7 +146,7 @@ public class sequences {
             }
         }
 
-        // Sets the sequences from the temporary list to the seqList to sort all entries by length
+        // Sets the Sequences from the temporary list to the seqList to sort all entries by length
         for (int j = 0; j < newSeqList.size(); j++){
             Sequence newSeq = newSeqList.get(j);
             seqList.set(j, newSeq);         
