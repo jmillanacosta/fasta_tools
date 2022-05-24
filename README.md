@@ -19,7 +19,7 @@ javac src/*.java
 And then run `FastaTools`:
 
 ```
-java src/FastaTools
+java src/FastaTools 0 1 (2) (3)
 ``` 
 
 It is necessary to pass the arguments in the table below.
@@ -77,6 +77,13 @@ It is necessary to pass the arguments in the table below.
 </table>
 
 ### Examples
+
+The most basic usage is to pass two arguments (`file` and `outFile`) to write a new file without duplicate entries (if any).
+
+```
+// Removes duplicates
+java src/FastaTools in.fasta out.fasta
+```
 
 Remove `r` and browse `b`require a pattern `p` in position 2. For sorting (`sd` and `ad`), position 2 becomes `outFile`.
 
