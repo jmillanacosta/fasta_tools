@@ -74,10 +74,29 @@ public abstract class FastaToString {
             String[][] res = {};
             System.exit(0);
             return res;                  
-          }
-    
+            }  
+        }
 
-        
-        
+    //Prints help message
+        static void help(String fileName){
+            try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    System.out.println(line);
+                }
+            }
+            catch(FileNotFoundException ex) {
+                System.out.println(
+                    "Unable to open file '" + 
+                    fileName + "'\n"); 
+                System.exit(0);
+            }
+            // Error reading file
+            catch(IOException ex) {
+                System.out.println(
+                    "Error reading file '" 
+                    + fileName + "'\n");  
+                System.exit(0);
+                }  
     }
 }

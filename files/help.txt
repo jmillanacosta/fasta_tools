@@ -1,0 +1,38 @@
+___________________________________________________________________________________________________________            
+
+                                                FastaTools
+                    
+                                Reads a fasta file and performs simple analyses.
+___________________________________________________________________________________________________________
+
+1.    Introduction
+
+    Key Features:
+        * Upon opening a file, removal of duplicate entries
+        * Sorting entries by ascending or descending order of length.
+        * Removing queried entries
+        * Generating a new file / overwriting with queried entries only
+
+2.      Running   
+
+    1. Compile all classes under src:                   javac src/*.java
+    2. Run FastaTools:                                  java src/FastaTools arg0 (arg1) (arg2) (arg3)
+
+3.        Arguments                   
+    _____________________________________________________________________________________________________
+    | Arg 0   |    h (help)                            |  file path (browse/remove/sort/no option)       | 
+    | Arg 1   |    option (b:browse/ r:remove/         |                                                 |
+    |         |     sa||sd: sort ascending/descending) |  out file path (no option)                      |
+    | Arg 2   |    path (browse/remove)                |  out file path (sa, ascending || sd, desc.)     |
+    | Arg 3   |    outfile (browse/remove)             |                                                 |
+    |_________|________________________________________|_________________________________________________|
+
+4.      Details   
+
+     * All entries in the `file` fasta file are parsed with `FastaToString.reader(file)`. 
+     * Objects in the class `Sequence` store entries with their `id`, `sequence` and `length` attributes.
+     * Objects in the class `Sequences` store an ArrayList of sequences and provide the methods to browse, 
+     remove, sort and write sequences into a new or existing file.
+
+
+

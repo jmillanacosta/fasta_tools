@@ -152,7 +152,11 @@ public class Sequences {
             Sequence newSeq = newSeqList.get(j);
             seqList.set(j, newSeq);         
         }      
-        System.out.println("Successfully sorted entries in " + order + " order");
+        if (!newSeqList.isEmpty()){
+            System.out.println("Successfully sorted entries in " + order + " order");
+        } else {
+            System.out.println("Not sorted.");
+        }
 
     }
 
