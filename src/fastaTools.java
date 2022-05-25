@@ -36,7 +36,11 @@ public class FastaTools {
         // Browsing entries
         if (option.equals("b")) {
             System.out.println("\nb - Browse pattern '" + p + "'. The following entries match the pattern:");
-            mySeqs.browse(p); 
+            mySeqs.browse(p);
+            Sequences newSeqs = new Sequences("");
+            newSeqs.seqList.clear();
+            newSeqs.seqList.addAll(mySeqs.browse(p));
+            newSeqs.writeFasta(outFile);
             System.out.print("Storing entries in " + outFile);
         }   
     

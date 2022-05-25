@@ -19,27 +19,32 @@ public class Sequences {
     }
     // Constructor
     public Sequences(String file){ 
-    String[][] entries = FastaToString.reader(file);
-    List<String> seen = new ArrayList<String>();
-    System.out.println(sep + "Retrieving entries" );
-    int count = 0;
-    int redundant = 0;
-    for (String[] entry : entries){
-        Sequence myEntry = new Sequence(entry);
-        if (seen.contains(myEntry.id)){
-            System.out.println("Redundant entry with identifier " + myEntry.id + " ommited.");
-            redundant++;
-            
-        }else{
-            seqList.add(myEntry); 
-            seen.add(myEntry.id);
-            count++;
+        // empty file ("") used to instantiate empty object
+    if (file.equals("")){
+        seqList.isEmpty();
+    } else {
+        // instantiate object from a fasta file
+        String[][] entries = FastaToString.reader(file);
+        List<String> seen = new ArrayList<String>();
+        System.out.println(sep + "Retrieving entries" );
+        int count = 0;
+        int redundant = 0;
+        for (String[] entry : entries){
+            Sequence myEntry = new Sequence(entry);
+            if (seen.contains(myEntry.id)){
+                System.out.println("Redundant entry with identifier " + myEntry.id + " ommited.");
+                redundant++;
+                
+            }else{
+                seqList.add(myEntry); 
+                seen.add(myEntry.id);
+                count++;
+            }            
         }
+        System.out.println(count +  " entries identified. " + redundant + " redundant entries ommited");
+        }
+    }
 
-        
-    }
-    System.out.println(count +  " entries identified. " + redundant + " redundant entries ommited");
-    }
 
     // Makes a list
     public final List<Sequence> seqList = new ArrayList<Sequence>();
