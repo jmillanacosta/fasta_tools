@@ -99,7 +99,7 @@ java src/FastaTools in.fasta sd out.fasta
 ```
 
 will create/overwrite a file `out.fasta` with all entries in `in.fasta` sorted by descending length.
-(Work in progress)
+
 
 ## Details
 * All entries in the `file` fasta file are parsed with `FastaToString.reader(file)`. 
