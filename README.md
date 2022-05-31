@@ -22,17 +22,17 @@ And then run `FastaTools`:
 java src/FastaTools 0 1 (2) (3)
 ``` 
 
-It is necessary to pass the arguments in the table below.
+It is necessary to pass the flags in the table below.
 
 ## Usage
 
-### Table of arguments
+### Table of flags
 
 <table>
     <thead>
         <tr>
             <th>Position</th>
-            <th>Argument</th>
+            <th>Flag</th>
             <th>Description</th>
         </tr>
     </thead>
@@ -78,7 +78,7 @@ It is necessary to pass the arguments in the table below.
 
 ### Examples
 
-The most basic usage is to pass two arguments (`file` and `outFile`) to write a new file without duplicate entries (if any).
+The most basic usage is to pass two flags (`file` and `outFile`) to write a new file without duplicate entries (if any).
 
 ```
 // Removes duplicates
