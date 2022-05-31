@@ -90,16 +90,18 @@ Remove `r` and browse `b`require a pattern `p` in position 2. For sorting (`sd` 
 For example:
 
 ```
+// Removes all entries in in.fasta containing "dummy" in their id and saves result as out.fasta
 java src/FastaTools in.fasta r dummy out.fasta
 ```
 will create/overwrite a file `out.fasta` with all entries in `in.fasta` except the ones containing the pattern `dummy` in their sequence identifier.
 
 ```
+// Sorts entries in in.fasta in descending sequence length order and saves the result to out.fasta
 java src/FastaTools in.fasta sd out.fasta
 ```
 
 will create/overwrite a file `out.fasta` with all entries in `in.fasta` sorted by descending length.
-(Work in progress)
+
 
 ## Details
 * All entries in the `file` fasta file are parsed with `FastaToString.reader(file)`. 
